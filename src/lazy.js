@@ -1,0 +1,1 @@
+// codigo de lazy loading
