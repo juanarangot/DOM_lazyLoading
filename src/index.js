@@ -9,8 +9,53 @@ const appNode = document.querySelector("#app");
 const USER = "juanmaracho10@gmail.com";
 const API_KEY = "WLd665Y8DzWCBC55jZ8p94RPliXgzslaYYPYTXuEODM";
 
+
+// Trabajando con el formulario de búsqueda
+let formulario = document.querySelector("#queryForm");
+formulario.className = "bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4";
+formulario.placeholder = "Busca una imagen aqui";
+
+
+
+// Obtener y retorna el valor del formulario enviado
+const boton = document.querySelector("#submitButton");
+
+// formulario.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   alert();
+//   let valor = document.querySelector("#queryForm").value;
+//   console.log(`Ha ingresado: ${valor}`);
+//   return valor
+// });
+
+function getQuery() {
+boton.addEventListener("click", (e) => {
+  e.preventDefault();
+  let valor = document.querySelector("#queryForm").value;
+  console.log(`Ha ingresado: ${valor}`);
+  return valor
+});
+}
+
+// boton.onclick.preventDefault();
+const prueba = document.querySelector("#prueba");
+
+
+// function getQuery() {
+//   boton.addEventListener("click", (evento) => {
+//     // Previene el comportamiento por defecto del formulario para que no se envíe 2 veces
+//     evento.preventDefault();
+//     alert()
+
+//     let valor = document.querySelector("#queryForm");
+//     console.log(`Ha ingresado: ${valor}`);
+//     return valor
+//   });
+// }
+
+
 // parametro de busqueda temporal para la prueba
-const queryWord = "micorosft windows";
+const queryWord = getQuery();
 // Web API fetch
 // Conectarnos al servidor
 window
