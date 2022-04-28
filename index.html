@@ -50,9 +50,9 @@
         <div id="form-container">
           <form action="" id="prueba">
             <label for="queryForm"><h3 class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Motor de imagenes</h3></label>
-            <input name="queryForm" type="text" id="queryForm" required >
+            <input name="queryForm" type="text" id="queryForm">
 
-            <button id="submitButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  value="Buscar">
+            <button id="submitButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Buscar">
               Buscar
             </button>
           </form>
@@ -64,7 +64,8 @@
 
     <br>
 
-    <fieldset class="text-center">
+    <!-- Se oculta el bloque, el cual luego se muestra cuando se llena el formulario de busqueda -->
+    <fieldset class="text-center" style="display: none"  id="lastBlock">
       <p class="p-3">
         <legend class="mx-auto text-sm text-gray-500">
           Haga click para agregar una nueva Imagen
