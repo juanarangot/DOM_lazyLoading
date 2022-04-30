@@ -13,8 +13,10 @@ const boton = document.querySelector("#submitButton");
 // Boton para agregar imagenes
 const botonInterno = document.querySelector("#addImage");
 botonInterno.addEventListener("click", (e) => {
+  e.preventDefault();
   agregarImagenes(formulario.value.trim());
 });
+// TODO: agregar funcionalidad al boton de limpiar el contenedor de imagenes
 
 
 // Trabajando con el formulario de búsqueda
@@ -35,7 +37,7 @@ let dataRequestObject = {
   lastIndex: 0,
   // Metodos para maniular los datos de la solicitud
   // Obtiene y retorna un array con los resultados de la busqueda
-  hacerSolicitud: async function () {
+  hacerSolicitud: function () {
     console.log(`Buscando el termino ${this.query}`);
     window
       .fetch(`${URL}/search/photos/?query=${this.query}&page=${this.numeroDePagina}&per_page=${this.cantidad}&access_token=${access_token}`, {
@@ -48,7 +50,7 @@ let dataRequestObject = {
           console.log("ha funcionado")
           this.aumentarNumeroDePagina(); // Se aumenta el numero de pagina para la siguiente solicitud
 
-          let resultados = data.results;
+          const resultados = data.results;
           console.log(resultados);
 
           this.resultados = resultados; // Se agrega el resultado a la lista de resultados
@@ -83,12 +85,8 @@ const agregarImagenes = (query) => {
 
   const imageNode = () => {
     // se puede usar shift, para eliminar el primer elemento de la lista y retornarlo. y asi agregarlo al dom
-    let elemento = dataRequestObject.resultados.shift();
-    // TODO: revisar el error que se genera aqui con el primer resultado
-    console.log("ANTES");
-    console.log(dataRequestObject.resultados);
+    var elemento = dataRequestObject.resultados.shift();
     console.log(elemento);
-    console.log("DESPUES");
 
     // Se crea el <div> contenedor de la imagen
     const imageContainer = document.createElement('div');
@@ -118,7 +116,8 @@ const agregarImagenes = (query) => {
     // Se obtiene la lista de imagenes
     console.log("TRATANDO CON EL OBJETO")
 
-    // TODO: aqui se genera la imagen para agregarla al DOM
+    // aqui se genera la imagen para agregarla al DOM
+    // se llama la funcion que agrega la imagen al DOM
     imageNode();
   }
   // Se comprueba si ya se hizo la solicitud de la API anteriormente
@@ -129,9 +128,11 @@ const agregarImagenes = (query) => {
     dataRequestObject.hacerSolicitud(); // Se hace la solicitud de la API
     // Se cambia el estado inicial a false para que no se vuelva a hacer la solicitud
     dataRequestObject.estadoInicial = false;
-    imageNode();
 
-    // TODO: hacer la funcion que compruebe si se han terminado las imagenes
+    // Se espera 1 segundo a que se procese la solicitud
+    setTimeout(imageNode, 1000);
+
+    // TODO: hacer la funcion que compruebe si se han terminado las imagenes ...
   }
   // En caso de que la solicitud no devuelva resultados
   else {
